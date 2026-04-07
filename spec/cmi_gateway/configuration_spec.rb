@@ -17,10 +17,10 @@ RSpec.describe CmiGateway::Configuration do
       config = described_class.new
       config.client_id = "c1"
       config.store_key = "k1"
-      config.add_profile(:vc, client_id: "vc1", store_key: "vk1")
-      prof = config.profile_for(:vc)
-      expect(prof.client_id).to eq("vc1")
-      expect(prof.store_key).to eq("vk1")
+      config.add_profile(:merchant_a, client_id: "ma1", store_key: "mk1")
+      prof = config.profile_for(:merchant_a)
+      expect(prof.client_id).to eq("ma1")
+      expect(prof.store_key).to eq("mk1")
     end
 
     it "raises for unknown profile" do

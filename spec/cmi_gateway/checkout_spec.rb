@@ -10,7 +10,7 @@ RSpec.describe CmiGateway::Checkout do
       c.environment = :test
       c.client_id = "client_123"
       c.store_key = "store_key_abc"
-      c.add_profile(:vc, client_id: "vc_client", store_key: "vc_store")
+      c.add_profile(:merchant_a, client_id: "merchant_a_client", store_key: "merchant_a_store")
     end
   end
 
@@ -80,10 +80,10 @@ RSpec.describe CmiGateway::Checkout do
         ok_url: "https://example.com/ok",
         fail_url: "https://example.com/fail",
         callback_url: "https://api.example.com/cmi",
-        profile: :vc,
+        profile: :merchant_a,
       )
       p = checkout.params
-      expect(p["clientid"]).to eq("vc_client")
+      expect(p["clientid"]).to eq("merchant_a_client")
     end
 
     it "merges extra_params" do

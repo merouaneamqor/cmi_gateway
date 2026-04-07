@@ -1,17 +1,26 @@
 # cmi_gateway
 
+[![Gem Version](https://badge.fury.io/rb/cmi_gateway.svg)](https://rubygems.org/gems/cmi_gateway)
+
 Ruby helpers for **CMI (Centre Monétique Interbancaire)** [3D Pay Hosting](https://www.cmi.co.ma/) integration: build signed checkout form parameters (SHA-512 + Base64) and parse server callbacks.
 
+- **RubyGems:** [rubygems.org/gems/cmi_gateway](https://rubygems.org/gems/cmi_gateway)
 - **No Rails required** — uses only the Ruby standard library.
-- **Multiple merchant profiles** (e.g. default + VC) via `CmiGateway.configure`.
+- **Multiple merchant profiles** (e.g. multiple CMI merchant accounts) via `CmiGateway.configure`.
 
 ## Installation
 
 Add to your `Gemfile`:
 
 ```ruby
+gem "cmi_gateway", "~> 0.1"
+```
+
+From GitHub instead of RubyGems (edge / contribution):
+
+```ruby
 gem "cmi_gateway", github: "merouaneamqor/cmi_gateway"
-# or, during development:
+# local path during development:
 # gem "cmi_gateway", path: "../cmi_gateway"
 ```
 
@@ -32,11 +41,13 @@ CmiGateway.configure do |config|
   config.client_id = ENV.fetch("CMI_CLIENT_ID", nil)
   config.store_key = ENV.fetch("CMI_STORE_KEY", nil)
 
-  vc_id = ENV["CMI_VC_CLIENT_ID"].to_s.strip
-  vc_key = ENV["CMI_VC_STORE_KEY"].to_s.strip
-  if !vc_id.empty? && !vc_key.empty?
-    config.add_profile(:vc, client_id: vc_id, store_key: vc_key)
-  end
+  # Named profiles for additional CMI merchant accounts
+  config.add_profile(:merchant_a,
+    client_id: ENV["CMI_MERCHANT_A_CLIENT_ID"],
+    store_key: ENV["CMI_MERCHANT_A_STORE_KEY"])
+  config.add_profile(:merchant_b,
+    client_id: ENV["CMI_MERCHANT_B_CLIENT_ID"],
+    store_key: ENV["CMI_MERCHANT_B_STORE_KEY"])
 end
 ```
 
@@ -60,8 +71,8 @@ checkout = CmiGateway::Checkout.new(
   shopurl: "https://example.com",
   lang: "fr",
   tran_type: "PreAuth",
-  profile: :default,      # or :vc when configured
-  accent_strip: false,   # set true for stricter VC-style accent handling on hash inputs
+  profile: :default,      # or any named profile (:merchant_a, :merchant_b, ...)
+  accent_strip: false,   # set true for stricter accent handling on hash inputs
   extra_params: {}       # merged into signed params (string keys recommended)
 )
 

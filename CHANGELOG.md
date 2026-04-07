@@ -11,7 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- `CmiGateway::Configuration` and global `CmiGateway.configure` for environment and merchant profiles (default + named, e.g. `:vc`).
+- `CmiGateway::Configuration` and global `CmiGateway.configure` for environment and named merchant profiles.
 - `CmiGateway::Checkout` — 3D Pay Hosting parameter build, SHA-512 hash (`ver3`), test/production gateway URLs.
 - `CmiGateway::Callback` — parse callback params; `success?` from `ProcReturnCode` / `Response`.
 - `CmiGateway::Helpers` — amount formatting, hash escaping, transliteration helpers.
