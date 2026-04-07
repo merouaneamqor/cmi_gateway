@@ -112,6 +112,14 @@ bundle exec rspec
 bundle exec rubocop
 ```
 
+## Community
+
+- [Contributing](CONTRIBUTING.md)
+- [Code of conduct](CODE_OF_CONDUCT.md)
+- [Security policy](SECURITY.md)
+- [Changelog](CHANGELOG.md)
+- AI assistants: see [CLAUDE.md](CLAUDE.md)
+
 ## License
 
 MIT — see [LICENSE.txt](LICENSE.txt).

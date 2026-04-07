@@ -10,14 +10,16 @@ Gem::Specification.new do |spec|
 
   spec.summary = "CMI (Morocco) 3D Pay Hosting checkout signing and callback parsing"
   spec.description = "Builds CMI payment form parameters and SHA-512 hash; parses server callbacks."
-  spec.homepage = "https://github.com/marouaneamqor/cmi_gateway"
+  spec.homepage = "https://github.com/merouaneamqor/cmi_gateway"
   spec.license = "MIT"
   spec.required_ruby_version = ">= 3.1.0"
 
   spec.metadata["homepage_uri"] = spec.homepage
   spec.metadata["source_code_uri"] = spec.homepage
+  spec.metadata["changelog_uri"] = "#{spec.homepage}/blob/master/CHANGELOG.md"
+  spec.metadata["bug_tracker_uri"] = "#{spec.homepage}/issues"
 
-  spec.files = Dir["lib/**/*.rb"].concat(%w[README.md LICENSE.txt])
+  spec.files = Dir["lib/**/*.rb"].concat(%w[README.md LICENSE.txt CHANGELOG.md])
   spec.bindir = "exe"
   spec.executables = []
   spec.require_paths = ["lib"]
